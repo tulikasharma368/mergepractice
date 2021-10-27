@@ -1,0 +1,94 @@
+vanapyzi@acrossgracealley.com
+temp@1234
+
+
+
+import React from "react";
+import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import "../../pages/loginsignup.scss";
+
+const Signup = () => {
+  const [fullName, setfullName] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [phone, setphone] = useState("");
+  const [nameerror, setnameerror] = useState(false);
+  const [emailerror, setemailerror] = useState(false);
+  const [passerror, setpasserror] = useState(false);
+  const [phoneerror, setphoneerror] = useState(false);
+  const [target, settarget] = useState("");
+
+  const change = (e) => {
+    console.log(e.target.value);
+    settarget(e.target.value);
+  };
+
+  const isValidated = () => {
+    let isError = false;
+    setnameerror(fullName == "" ? true : false);
+    setpasserror(password == "" ? true : false);
+    setemailerror(email == "" ? true : false);
+    setphoneerror(phone == "" ? true : false);
+
+    return (isError = nameerror || passerror || emailerror || phoneerror);
+  };
+
+  const signup = () => {
+    let isValid = isValidated();
+    console.log(isValid);
+    if (!isValid) {
+      console.log("Validation done");
+    }
+  };
+
+  return (
+    <div className="loginsepdiv">
+      <p>Full Name</p>
+      <TextField
+        name="fullName"
+        className="textfield"
+        id="outlined-basic"
+        fullWidth
+        variant="outlined"
+        onChange={(e) => change(e)}
+        helperText={nameerror ? "Enter fullName" : ""}
+      />
+      <p>Email id</p>
+      <TextField
+        name="email"
+        className="textfield"
+        id="outlined-basic"
+        fullWidth
+        variant="outlined"
+        onChange={(e) => change(e)}
+        helperText={emailerror ? "Enter email id" : ""}
+      />
+      <p>Password</p>
+      <TextField
+        name="password"
+        className="textfield"
+        id="outlined-basic"
+        fullWidth
+        variant="outlined"
+        onChange={(e) => change(e)}
+        helperText={passerror ? "Enter password" : ""}
+      />
+      <p>Phone Number</p>
+      <TextField
+        name="phone"
+        className="textfield"
+        id="outlined-basic"
+        fullWidth
+        variant="outlined"
+        onChange={(e) => change(e)}
+        helperText={phoneerror ? "Enter phone number" : ""}
+      />
+      <button className="loginbutton" onClick={signup}>
+        Signup
+      </button>
+    </div>
+  );
+};
+
+export default Signup;
